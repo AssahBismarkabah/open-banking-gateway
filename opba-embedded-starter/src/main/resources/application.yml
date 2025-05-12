@@ -1,6 +1,13 @@
 server:
   # Port to use when starting application
-  port: 8085
+  port: 8080
+  # CORS configuration
+  cors:
+    allowed-origins: http://localhost:3000
+    allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+    allowed-headers: "*"
+    allow-credentials: true
+    max-age: 3600
 spring:
   # Datasource connection properties
   datasource:
@@ -36,8 +43,8 @@ spring:
       # Prefix for OBG tables in database
       table-prefix: opb_
       # Sandbox URLs
-      adorsys-sandbox-url: http://localhost:20014
-      adorsys-sandbox-oauth-server-url: http://localhost:20015/oauth/authorization-server
+      adorsys-sandbox-url: https://xs2a-connector-modelbank.support.sol.adorsys.com/
+      adorsys-sandbox-oauth-server-url: hhttps://xs2a-online-modelbank.support.sol.adorsys.com/
       adorsys-hbci-sandbox-url: http://localhost:8090/hbci-mock/
     # Which migrations types to apply (pre-load bank data into database)
     contexts: dev,mock-banks
