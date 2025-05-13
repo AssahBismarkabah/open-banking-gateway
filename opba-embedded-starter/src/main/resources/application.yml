@@ -1,6 +1,6 @@
 server:
   # Port to use when starting application
-  port: 8080
+  port: 8085
   # CORS configuration
   cors:
     allowed-origins: http://localhost:3000

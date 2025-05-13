@@ -43,7 +43,10 @@ public class SecurityConfig {
             "X-XSRF-TOKEN",
             "X-SESSION-MAX-AGE",
             "X-REDIRECT-MAX-AGE",
-            "Authorization"
+            "Authorization",
+            "X-Fintech-ID",
+            "x-session-id",
+            "x-timestamp"
         ));
         configuration.setExposedHeaders(Arrays.asList(
             "X-XSRF-TOKEN",

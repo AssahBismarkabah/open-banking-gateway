@@ -22,7 +22,7 @@ server:
       path: /v1/{auth-id}/fromConsentOk
       sameSite: Strict
 tpp:
-  url: http://localhost:8086
+  url: http://localhost:8085
 
 spring:
   datasource:
