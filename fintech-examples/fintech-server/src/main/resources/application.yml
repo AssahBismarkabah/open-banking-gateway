@@ -29,7 +29,6 @@ server:
       - http://127.0.0.1:3000
     allowed-methods: GET,POST,PUT,DELETE,OPTIONS
     allowed-headers: 
-      - "*"
       - "Content-Type"
       - "X-Request-ID"
       - "X-XSRF-TOKEN"
@@ -128,3 +127,8 @@ oauth2:
         - ^.+@adorsys\.com\.ua$
         - ^.+@golden-dimension\.com$
         - ^.+@golden-dimension\.com\.ua$
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.web: DEBUG

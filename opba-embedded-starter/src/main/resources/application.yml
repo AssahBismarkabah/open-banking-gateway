@@ -443,3 +443,8 @@ bpmnshared:
     number-of-retries: 0
 flowable:
   process-definition-location-prefix: classpath*:/processes/**/
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.web: DEBUG

@@ -24,7 +24,7 @@ export class AccountAccess {
   transactions: AccountReference[];
 
   availableAccounts: AccountAccessLevel;
-  allPsd2: string;
+  allPsd2?: string;
 }
 
 export interface AccountReference {

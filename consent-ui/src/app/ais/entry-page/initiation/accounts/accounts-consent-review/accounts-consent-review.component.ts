@@ -11,6 +11,7 @@ import { ApiHeaders } from '../../../../../api/api.headers';
 import { ConsentAuth, UpdateConsentAuthorizationService, PsuAuthRequest } from '../../../../../api';
 import { DATA_PATTERN, MAX_FREQUENCY_PER_DAY } from '../../../../common/constant/constant';
 import { DateUtil } from '../../../../common/date-util';
+import { AisAccountAccessInfo } from 'src/app/api/model/aisAccountAccessInfo';
 
 @Component({
     selector: 'consent-app-accounts-consent-review',
@@ -61,6 +62,25 @@ export class AccountsConsentReviewComponent implements OnInit {
     this.aisConsent.consent.validUntil = this.consentReviewForm.value.validUntilDate;
     this.aisConsent.consent.frequencyPerDay = this.consentReviewForm.value.frequencyPerDay;
 
+    // Initialize access object if it doesn't exist
+    if (!this.aisConsent.consent.access) {
+      this.aisConsent.consent.access = {
+        accounts: [],
+        balances: [],
+        transactions: [],
+        availableAccounts: AccountAccessLevel.ALL_ACCOUNTS
+      };
+    }
+
+    // Set allPsd2 based on access level
+    if (this.aisConsent.level === AccountAccessLevel.ALL_PSD2) {
+      this.aisConsent.consent.access.allPsd2 = AisAccountAccessInfo.AllPsd2Enum.ACCOUNTS;
+    } else {
+      if ('allPsd2' in this.aisConsent.consent.access) {
+        delete this.aisConsent.consent.access.allPsd2;
+      }
+    }
+
     this.sessionService.setConsentObject(this.authorizationId, this.aisConsent);
 
     const body = { extras: this.aisConsent.extras } as PsuAuthRequest;
@@ -77,9 +97,15 @@ export class AccountsConsentReviewComponent implements OnInit {
         body,
         'response'
       )
-      .subscribe((res) => {
-        this.sessionService.setRedirectCode(this.authorizationId, res.headers.get(ApiHeaders.X_XSRF_TOKEN));
-        window.location.href = res.headers.get(ApiHeaders.LOCATION);
+      .subscribe({
+        next: (res) => {
+          this.sessionService.setRedirectCode(this.authorizationId, res.headers.get(ApiHeaders.X_XSRF_TOKEN));
+          window.location.href = res.headers.get(ApiHeaders.LOCATION);
+        },
+        error: (err) => {
+          const message = err?.error?.message || 'An error occurred. Please try again.';
+          alert(message); // Replace with your toast/snackbar logic if available
+        }
       });
   }
 

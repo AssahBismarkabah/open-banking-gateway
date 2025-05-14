@@ -46,14 +46,18 @@ public class SecurityConfig {
             "Authorization",
             "X-Fintech-ID",
             "x-session-id",
-            "x-timestamp"
+            "x-timestamp",
+            "fintech-redirect-url-ok",
+            "fintech-redirect-url-nok",
+            "LoARetrievalInformation"
         ));
         configuration.setExposedHeaders(Arrays.asList(
             "X-XSRF-TOKEN",
             "X-SESSION-MAX-AGE",
             "X-REDIRECT-MAX-AGE",
             "X-REQUEST-ID",
-            "Set-Cookie"
+            "Set-Cookie",
+            "Location"
         ));
         configuration.setAllowCredentials(true);
         configuration.setMaxAge(3600L);
